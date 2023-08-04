@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from django import VERSION as django_version
 from django import forms
 from django.conf import settings
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.safestring import mark_safe
 from django.utils.html import format_html
 
@@ -25,7 +25,7 @@ class IconWidget(forms.Select):
         def render_option(self, selected_choices, option_value, option_label):
             if option_value is None:
                 option_value = ''
-            option_value = force_text(option_value)
+            option_value = force_str(option_value)
             if option_value in selected_choices:
                 selected_html = mark_safe(' selected="selected"')
                 if not self.allow_multiple_selected:
@@ -36,7 +36,7 @@ class IconWidget(forms.Select):
             return format_html('<option data-icon="{0}" value="{0}"{1}>{2}</option>',
                 option_value,
                 selected_html,
-                force_text(option_label),
+                force_str(option_label),
             )
 
     class Media:
